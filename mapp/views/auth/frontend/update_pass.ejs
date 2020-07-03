@@ -1,0 +1,42 @@
+<% 
+    var item = item || {};
+    let formAction = `${controller}/update-new-pass/${updatePassCode}`;
+    let isShow = false;
+    let classes = '';
+    var errors = errors || [];
+    
+    if (flash.error && errors.length < 1){
+        isShow = true;
+        classes = 'alert alert-danger col-12';
+        for (let item of flash.error){
+            errors.push({param: '', msg: item});
+        }
+    }
+%> 
+<div class="container-fluid bg-white pt-3">
+    <div class="row">
+        <div class="offset-0 offset-lg-2 col-lg-8">
+            <%- include(__path.views_auth+'/frontend/template/heading', {title: 'Update new password'}) %>
+            <form method="post" action="<%= formAction %>" >
+                <%- include(__path.views+'/admin/template/show-form-errors.ejs', {errors: errors}) %>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-3 col-form-label" required="required" >New password</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" id="inputPassword" name="password" >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPasswordConfirmed" class="col-sm-3 col-form-label" required="required" >Confirmation</label>
+                    <div class="col-sm-9">
+                        <input type="password" class="form-control" id="inputPasswordConfirmed" name="password_confirmed" >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 offset-0 offset-sm-2">
+                        <button class="btn btn-dark btn-block">Update</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

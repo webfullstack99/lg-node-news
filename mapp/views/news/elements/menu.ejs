@@ -1,0 +1,41 @@
+<% 
+    const _helper = require(__path.helper+'/helper'); 
+    const _template = require(__path.helper+'/template'); 
+    var user = user || undefined;
+%>
+<div class="container main-menu" id="main-menu">
+    <div class="row align-items-center justify-content-between">
+        <nav id="nav-menu-container">
+            <ul class="news-menu nav-menu">
+                <li name="<%= displayConf.prefix.news %>"><a href="<%= displayConf.prefix.news %>">Home</a></li>
+                <% if (catsMenu.length > 0){ %>
+                    <li class="menu-has-children">
+                        <a href="<%=_template.standardizeLink('')%>">Category</a>
+                        <ul>
+                            <% for (let cat of catsMenu) { %>
+                                <%
+                                let link = _helper.createFrontendLink({type: 'category', slug: cat.slug, id: cat._id});
+                                %>
+                                <li><a href="<%=link%>"><%=cat.name%></a></li>
+                            <% } %>
+                        </ul>
+                    </li>
+                <% } %>
+            <li name="<%= displayConf.prefix.news %>contact"><a href="<%= displayConf.prefix.news %>contact">Contact</a></li>
+            <li name="<%= displayConf.prefix.news %>about"><a href="<%= displayConf.prefix.news %>about">About</a></li>
+            <%- include(__path.views_news+'/elements/userMenu'); %>
+        </ul>
+        </nav><!-- #nav-menu-container -->
+        <div class="navbar-right">
+            <form class="Search">
+                <input type="text" class="form-control Search-box" name="Search-box" id="Search-box" placeholder="Search">
+                <label for="Search-box" class="Search-box-label">
+                    <span class="lnr lnr-magnifier"></span>
+                </label>
+                <span class="Search-close">
+                    <span class="lnr lnr-cross"></span>
+                </span>
+            </form>
+        </div>
+    </div>
+</div>

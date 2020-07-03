@@ -1,0 +1,30 @@
+{
+  "basicInfo": {
+    "phoneNumber": "+84812467871",
+    "emailAddress": "peteranh99@gmail.com",
+    "facebookAddress": "https://www.facebook.com/peteranh99",
+    "facebookPageUrl": "https://www.facebook.com/pitoghichep/"
+  },
+  "webPage": {
+    "maxCatInMenu": 10,
+    "maxLatestPost": 10
+  },
+  "homePage": {
+    "maxTopPost": 3,
+    "maxCat": 5,
+    "maxPostInCat": 2
+  },
+  "catPage": {
+    "maxPost": 5,
+    "maxAddPostByAjax": 5,
+    "maxTotalPost": 40
+  },
+  "articlePage": {
+    "maxRelaventPost": 5
+  },
+  "mess": {
+    "homePage": {
+      "maxRoom": 10
+    }
+  }
+}

@@ -1,0 +1,12 @@
+<% if (catsInHome.length > 0){ %>
+        <div class="latest-post-wrap">
+            <h4 class="cat-title">Daily news</h4>
+            <% for (let item of catsInHome){ %>
+                <% if (item.display == 'list'){ %> 
+                    <%- include(__path.views_news+'/partials/category/list.ejs', {cat: item}); %>
+                <% }else if (item.display == 'grid'){ %> 
+                    <%- include(__path.views_news+'/partials/category/grid.ejs', {cat: item}); %>
+                <% } %>
+            <% } %>
+        </div>
+<% } %>

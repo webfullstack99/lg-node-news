@@ -1,0 +1,22 @@
+<section class="content">
+    <div class="col-md-8 no-padding-left">
+        <div class="box box-primary direct-chat direct-chat-primary">
+            <%- include('./main_content') %>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+
+            <!-- USER ONLINE -->
+            <%- include(__path.views_mess+'/blocks/user_online_box') %>
+        </div>
+    </div>
+
+    <!-- info inputs -->
+    <div class="input-container">
+        <%- include(__path.views_mess+'/blocks/info_inputs') %>
+    </div>
+</section>
+
+<!-- my socket.io -->
+<script src="messenger_theme/js/my-socketio/home-socketio.js"></script>

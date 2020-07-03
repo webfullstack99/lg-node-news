@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <%- include(__path.views+'/admin/template/heading.ejs'); %>
+        
+
+    <!-- Form -->
+    <div class="row">
+        <!-- Title -->
+        <%- include(__path.views+'/admin/template/x-title.ejs', {title: 'form'}); %>
+        <!-- Main Form -->
+        <div class="col-12 collapse show" id="form-collapse">
+            <!-- Alert -->
+            <div class="row">
+                <div class="col-12">
+                    <%- include(__path.views+'/flash'); %>
+                </div>
+            </div>
+            <!-- Form -->
+             <div class="row">
+                <div class="offset-0 offset-lg-3 col-lg-6">
+                    <%
+                        let Helper      = require(__path.helper+'/helper.js');
+                        let Form        = require(__path.helper+'/form.js'); 
+
+                        let template    = conf.template.form.normal;
+                        let selectData  = Form.createSelectData(['status', 'groupAcp'], [true, false]);
+                        
+                        let formData    = [
+                           {
+                                label: Form.label('name', 'Name', template.label),
+                                input: Form.text('name', item.name, template.text),   
+                           },{
+                                label: Form.label('status', 'Status', template.label),
+                                input: Form.select('status', selectData.status, item.status, template.select),   
+                           },{
+                                label: Form.label('groupAcp', 'Group Acp', template.label),
+                                input: Form.radioGroup('groupAcp', selectData.groupAcp, item.groupAcp, template.radioGroup),   
+                           },{
+                                label: Form.label('ordering', 'Ordering', template.label),
+                                input: Form.number('ordering', item.ordering || 50, template.number),   
+                           },{
+                                prepend: Form.hidden('_id', item._id),    
+                                input: Form.submit('Submit', template.submit),   
+                           },
+                        ]
+                        let formAction  = Helper.getUrl(displayConf.prefix.admin, controller, 'save');
+                        if (item._id) formAction+= '/'+item._id;
+                    %>
+                    <%- include(__path.views+'/admin/template/show-form-errors.ejs') %>
+                    <form method="post" action="<%= formAction %>" accept-charset="UTF-8">
+                        <%- include(__path.views+'/admin/template/generate_inputs.ejs', {formData: formData}) %>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- contentFor('hiddenInput') %>
+<input type="hidden" name="controller" value="<%=controller%>">

@@ -1,0 +1,9 @@
+<%
+    var item = item || {created: {}};
+    var user = user || {};
+%>
+<% if (item.user.username != user.username){ %>
+        <%- include(__path.views_mess+'/partials/direct_chat_msg_left', {item: item}) %>
+<% }else{ %>
+        <%- include(__path.views_mess+'/partials/direct_chat_msg_right', {item: item}) %>
+<% } %>

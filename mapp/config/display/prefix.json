@@ -1,0 +1,14 @@
+{
+  "admin": "/admin",
+  "auth": "/auth",
+  "news": "/",
+  "mess": "/messenger",
+  "frontend": {
+    "category": "category",
+    "article": "article"
+  },
+  "socketio": {
+    "server": "SERVER_",
+    "room": "ROOM_"
+  }
+}

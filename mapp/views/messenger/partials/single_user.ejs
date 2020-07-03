@@ -1,0 +1,37 @@
+<%
+    const _template = require(__path.helper+'/template');
+    var userType = userType || '';
+    let thumb = _template.showThumb({
+        classes: 'contacts-list-img',
+        thumb: item.thumb,
+        alt: item.username,
+        controller: 'user',
+    })
+    var relationship = relationship || '';
+    let btns = _template.showMessengerUserBtn({relationship, userId: item._id});
+    let wrapperClass;
+    switch (userType) {
+        case 'user-normal':
+            wrapperClass = 'col-sm-6 col-lg-4';
+            break;
+        case 'user-friendx':
+            wrapperClass = 'col-sm-6 col-lg-4';
+            break;
+        case 'user-online':
+            wrapperClass = 'col-xs-12 col-sm-8 col-md-12 col-sm-offset-2 col-md-offset-0';
+            break;
+        default:
+            wrapperClass = '';
+            break;
+    }
+    //let created = _template.showMessengerMsgHistory({time: item.created.time});
+%>
+<div class="user single-user <%= wrapperClass %>" data-username="<%= item.username %>">
+    <div class="col-xs-7 user-avatar">
+        <%- thumb %>
+        <h5 class="text-truncate" title="<%= item.username %>"><%= item.username %></h5>
+    </div>
+    <div data-userid="<%= item._id %>" data-relationship="<%= relationship %>" class="btns-container col-xs-5 btn-action-invite">
+        <%- btns %>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+<%
+    title               = title.trim();
+    let titleName       = title.substring(0,1).toUpperCase()+title.substring(1).toLowerCase();
+    let id              = title.toLowerCase()+'-collapse';
+%>
+
+<div class="col-12 mt-3">
+    <h4 class="float-left"><%=titleName %></h4>
+    <a data-toggle="collapse" class="float-right switch-caret-vertical" href="#<%= id %>" aria-expanded="true">
+        <span><i class="fas fa-caret-up fa-lg"></i></span>
+    </a>
+</div>

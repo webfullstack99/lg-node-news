@@ -1,0 +1,87 @@
+<html>
+<head>
+    <%- include(__path.views_mess+'/elements/head') %>
+    <%- include(__path.views_mess+'/elements/scripts') %>
+</head>
+<!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
+<body class="hold-transition skin-blue layout-top-nav">
+    <div class="wrapper">
+        <header class="main-header">
+            <nav class="navbar navbar-static-top bg-fb-blue">
+                <div class="container-fluid">
+                    <!-- NAVBAR - LOGO --> 
+                    <%- include(__path.views_mess+'/elements/navbar_logo') %>
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <%- include(__path.views_mess+'/elements/navbar_left') %>
+
+                    <!-- Navbar Right Menu -->
+                    <%- include(__path.views_mess+'/elements/navbar_right') %>
+                    
+
+                    <!-- /.navbar-custom-menu -->
+                </div>
+                <!-- /.container-fluid -->
+            </nav>
+        </header>
+
+        <!-- Full Width Column -->
+        <div class="content-wrapper">
+
+            <!-- Container type -->
+            <!-- 
+            <script>
+                let pathname = window.location.pathname;
+                let pattern = /(?<=\/)(\w+)\/\w+$/;
+                let result = pathname.match(pattern);
+                let action; let containerType;
+                try{ action = result[1]; }catch (e){ action = undefined; }
+                if (['messages'].includes(action)) containerType = 'container-fluid';
+                else containerType = 'container';
+                document.write(`<div class="${containerType}" >`)
+            </script>
+             -->
+            <div class="container-fluid">
+                <div class="row">
+                    <section class="content-header">
+                        <!--
+                        <h1>
+                            Top Navigation
+                            <small>Example 2.0</small>
+                        </h1>
+                        -->
+
+                        <!-- BREADCRUMB -->
+                        <%- include(__path.views_mess+'/elements/breadcrumb') %>
+                    </section>
+                </div>
+
+                <!-- MAIN CONTENT -->
+                <div class="row">
+                    <%- body %>
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <%- include(__path.views_mess+'/elements/footer') %>
+    </div>
+
+
+    <!-- Hidden inputs-->
+    <div id="hidden-input-container">
+        <% 
+            var user = user || {} 
+            const _helper = require(__path.helper+'/helper');
+            const _frontendTemplate = require(__path.config+'/frontend_template');
+        %>
+        <input type="hidden" value="<%= JSON.stringify(displayConf.prefix) %>" name="prefix">
+        <input type="hidden" value="<%= JSON.stringify(_helper.getProperty(user, 'friends')) %>" name="friends">
+        <input type="hidden" value="<%= JSON.stringify(_frontendTemplate.mess) %>" name="template">
+        <%- defineContent('hiddenInput') %>
+    </div>
+
+    <!-- template -->
+    <%- include(__path.views_mess+'/template/js_templates') %>
+</body>
+</html>

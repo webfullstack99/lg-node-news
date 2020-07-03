@@ -1,0 +1,22 @@
+select[field="display"]{
+  min-width: 80px !important;
+}
+
+.active-link{
+  font-weight: 700;
+  color: #fff;
+}
+
+@media screen and (max-width: 767.98px){
+  #list-table *{
+    font-size:12px;
+  }
+}
+
+@media screen and (min-width: 768px){
+  .mfa-lg-2x{
+    font-size:1.5em;
+  }
+}
+
+.cr-viewport.cr-vp-circle:focus {outline:none !important}

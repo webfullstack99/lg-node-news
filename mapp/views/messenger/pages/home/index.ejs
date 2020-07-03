@@ -1,0 +1,27 @@
+<section class="content">
+    <div class="col-md-8 no-padding-left">
+
+        <!-- DIRECT CHAT -->
+        <%- include(__path.views_mess+'/blocks/direct_chat_box', {msgs}) %>
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+
+            <!-- USER ONLINE -->
+            <%- include(__path.views_mess+'/blocks/user_online_box') %>
+        </div>
+        <div class="row">
+
+            <!-- ROOM -->
+            <%- include(__path.views_mess+'/blocks/room_box', {rooms}) %>
+        </div>
+    </div>
+
+    <!-- info inputs -->
+    <div class="input-container">
+        <%- include(__path.views_mess+'/blocks/info_inputs') %>
+    </div>
+</section>
+
+<!-- my socket.io -->
+<script src="messenger_theme/js/my-socketio/home-socketio.js"></script>

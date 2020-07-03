@@ -1,0 +1,41 @@
+<%
+    let util        = require('util');
+    let message;
+    let classes = 'alert alert-warning';
+    switch (type) {
+        case 'register-success':
+            message = '<p>Register successfully</p><p class="text-info h5">Please open email and cofirm your account</p>';
+            classes = 'alert alert-success'
+            break;
+        case 'register-fail':
+            message = 'Register fail';
+            classes = 'alert alert-warning'
+            break;
+        case 'activate-success':
+            message = 'Activate account successfully';
+            classes = 'alert alert-success'
+            break;
+        case 'update-pass-success':
+            message = '<p>Update your password successfully</p><p class="text-info h5">Please login your account with the new password</p>';
+            classes = 'alert alert-success'
+            break;
+        case 'update-pass-fail':
+            message = 'Update password fail';
+            classes = 'alert alert-success'
+            break;
+    
+        default:
+            message = 'Page not found';
+            break;
+    }
+    //message = util.format('<span class="lead">%s</span>', message);
+
+    
+%> 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+           <h3><%- message %></h3>
+        </div>
+    </div>
+</div>

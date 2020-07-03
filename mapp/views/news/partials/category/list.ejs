@@ -1,0 +1,24 @@
+<% 
+    const _helper = require(__path.helper+'/helper');
+    let catLink = _helper.createFrontendLink({type: 'category', slug: cat.slug, id: cat._id});
+%> 
+<div class="row">
+    <!-- category title -->
+    <div class=" col-12 d-flex align-items-start justify-content-start my-5">
+        <div class="h2 pr-3" style="white-space: nowrap;"><%= cat.name %></div>
+        <div class="w-100" style="height:20px; background: #ebeded; margin-top:5px"></div>
+    </div>
+
+    <!-- article posts -->
+    <div class="col-12">
+        <% for (let item of cat.articles){ %>
+                <% item.cat = {id: cat._id, slug: cat.slug, name: cat.name}; %>
+                <%- include(__path.views_news+'/partials/single_post.ejs', {item: item, displayCat: true}); %>
+        <% } %>
+    </div>
+
+    <!-- read more button -->
+    <div class="col-12 my-3 my-lg-5">
+        <%- include(__path.views_news+'/partials/read_more_btn', {catLink: catLink}) %>
+    </div>
+</div>

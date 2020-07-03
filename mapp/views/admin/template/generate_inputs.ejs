@@ -1,0 +1,37 @@
+<%
+    const _template = require(__path.helper+'/template');
+    var formData    = formData || [];    
+    let showCustomInput = (data) => {
+        switch (data.custom.type) {
+            case 'thumb':
+                return showThumb(data);
+        }
+    }
+
+    let showThumb = (data) => {
+        let xhtml = '';
+        let custom = data.custom;
+        let thumb = '';
+        let append = custom.prepend || '';
+        let prepend = custom.append || '';
+        let cropContainer = custom.isCrop || false;
+        if (custom.thumbData) thumb = `<p>${_template.showThumb(custom.thumbData)}</p>`;
+        xhtml += data.label;
+        xhtml +=    `<div class="${custom.containerClass}">\
+                       ${prepend} ${custom.input} ${custom.label} ${thumb} ${append}
+                    </div>`;
+        if (cropContainer) xhtml +=    '<div id="upload-demo"></div>';
+        return xhtml;
+    }
+%>
+<%  for (let item of formData){ %>
+        <div class="form-row position-relative"> 
+            <% if (item.custom) {%> <%-showCustomInput(item)%>  
+            <% }else { %> 
+                        <%-item.prepend%>
+                        <%-item.label%>
+                        <%-item.input%>
+                        <%-item.append%>
+            <% } %>
+        </div>
+<%  } %>

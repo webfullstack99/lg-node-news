@@ -1,0 +1,18 @@
+<%
+    var errors = errors || null;
+    let Helper = require(__path.helper+'/helper.js');
+    var errors = errors || [];
+%>
+<%  if (errors.length > 0) {%>
+        <ul id="form-errors" class="pl-4 alert alert-danger col-12">
+            <%  for (let value of errors){ %>
+                <%
+                    let name = '';
+                    if (value.param) name = Helper.ucfirst(value.param).replace(/\..*$/, '');
+                    let content = value.msg.toLowerCase();
+                    if (!value.param) content = Helper.ucfirst(content);
+                %>
+                    <li><strong><%=name%></strong> <%=content%></li> 
+            <% }%>
+        </ul>
+ <% } %>

@@ -1,0 +1,27 @@
+<% 
+    let totalFriendRequest = friendRequests.length;
+    
+%> 
+<li class="dropdown notifications-menu topbar-menu-margin-top">
+    <!-- Menu toggle button -->
+    <a id="notification-toggle-btn" href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-fw fa-user-plus"></i>
+        <span class="label label-warning total-friend-request"><%= totalFriendRequest %></span>
+    </a>
+    <ul class="dropdown-menu">
+        <li class="header">You have <span class="total-friend-request"><%= totalFriendRequest %></span> invitations</li>
+        <li>
+            <!-- Inner Menu: contains the notifications -->
+            <ul class="menu">
+                <li id="friend-invitation-box"><!-- start notification -->
+                    <% for (let item of friendRequests) { %>
+                            <%- include(__path.views_mess+'/partials/single_user', {relationship: 'receive-invite', userType: 'friend-request', item}) %>
+                    <% } %>
+                </li>
+                <!-- end notification -->
+            </ul>
+        </li>
+        <!-- <li class="footer"><a href="#">View all</a></li> -->
+        
+    </ul>
+</li>

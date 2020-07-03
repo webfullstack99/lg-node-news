@@ -1,0 +1,13 @@
+<% 
+    var user = user || {};
+    var prfSocketio = prfSocketio || displayConf.prefix.socketio.server;
+    let username = user.username;
+    let thumb = user.thumb;
+    let userId = user.id;
+    var controller = controller || '';
+%> 
+<input name="controller" type="hidden" value="<%= controller %>" />
+<input name="prfSocketio" type="hidden" value="<%= prfSocketio %>" />
+<input name="username" type="hidden" value="<%= username %>" />
+<input name="thumb" type="hidden" value="<%= thumb %>" />
+<input name="userId" type="hidden" value="<%= userId %>" />

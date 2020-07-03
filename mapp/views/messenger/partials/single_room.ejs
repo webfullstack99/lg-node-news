@@ -1,0 +1,24 @@
+<% 
+    const _template = require(__path.helper+'/template');
+    const _helper = require(__path.helper+'/helper');
+    let name = item.name;
+    let thumb = _template.showThumb({
+        classes: 'rooms-list-img',
+        thumb: item.thumb,
+        alt: name,
+        controller: 'room',
+    })
+    let roomLink = _helper.standardizeLink(`${displayConf.prefix.mess}/room/${item._id}`);
+%> 
+<div class="room">
+    <div class="col-xs-12 col-sm-8 col-md-12 col-sm-offset-2 col-md-offset-0">
+        <div  class="col-xs-7 room-avatar">
+            <%- thumb %>
+            <h5 class="room-name"><%= name %></h5>
+            <small>Member: 5</small>
+        </div>
+        <div class="col-xs-5 one-row-btns">
+            <a href="<%= roomLink %>" class="btn btn-block btn-primary">Join</a>
+        </div>
+    </div>
+</div>

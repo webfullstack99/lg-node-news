@@ -1,0 +1,21 @@
+<% 
+    let _form       = require(__path.helper+'/form.js');
+    var theadData   = theadData || [];
+%>
+
+<% theadData.forEach((item, key) => { 
+    let width   = item.width    || '';
+    let column  = item.column   || '';
+    let isSort  = item.isSort   || false;
+    let title   = item.title    || '';
+    let attr    = item.attr     || {};
+    let attrStr = _form.getAttrString(attr);
+%>
+    <th scope="col" width="<%=width%>" <%=attrStr%>>
+        <%if (isSort){%>
+            <a column="<%=column%>" class="text-decoration-none" href="#"><%=title%></a>
+        <%}else{%>
+            <%-title%>    
+        <%}%>
+    </th>
+<%})%>

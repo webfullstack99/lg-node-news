@@ -1,0 +1,28 @@
+{
+  "pagination": {
+    "item": {
+      "pageRange": 3,
+      "itemsPerPage": 5
+    },
+    "category": {
+      "pageRange": 3,
+      "itemsPerPage": 10
+    },
+    "room": {
+      "pageRange": 3,
+      "itemsPerPage": 5
+    },
+    "article": {
+      "pageRange": 3,
+      "itemsPerPage": 10
+    },
+    "group": {
+      "pageRange": 3,
+      "itemsPerPage": 5
+    },
+    "user": {
+      "pageRange": 3,
+      "itemsPerPage": 10
+    }
+  }
+}

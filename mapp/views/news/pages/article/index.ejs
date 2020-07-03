@@ -1,0 +1,9 @@
+<% 
+    let item = mainArticle;
+    const _template = require(__path.helper+'/template');
+    const _helper = require(__path.helper+'/helper');
+%> 
+<div class="single-post-wrap">
+    <%- include('./main_post.ejs'); %>
+    <%- include('./relavent_posts.ejs'); %>
+</div>

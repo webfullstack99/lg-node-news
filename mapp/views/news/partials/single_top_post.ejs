@@ -1,0 +1,39 @@
+<% 
+    const _template = require(__path.helper+'/template');
+    const _helper = require(__path.helper+'/helper');
+    var marginTop = marginTop || false;
+    marginTop = (marginTop) ? 'mt-10' : '';
+    let thumb = _template.showThumb({
+        thumb: item.thumb,
+        alt: item.title,
+        controller: 'article',
+    });
+    let catName = item.cat.name;
+    let username = item.created.username;
+    let time = _template.showItemFrontendHistory( {time: item.created.time} );
+    var isBig = isBig || false;
+    let title = (isBig) ? `<h3>${item.title}</h3>` : `<h4>${item.title}</h4>`;
+    let catLink = _helper.createFrontendLink({type: 'category', slug: item.cat.slug, id: item.cat.id});
+    let articleLink = _helper.createFrontendLink({type: 'article', slug: item.slug, id: item._id});
+    
+%> 
+<div class="single-top-post <%=marginTop%>">
+    <div class="feature-image-thumb relative">
+        <a href="<%= articleLink %>">
+            <div class="overlay overlay-bg"></div>
+            <%- thumb %>
+        </a>
+    </div>
+    <div class="top-post-details">
+        <ul class="tags">
+            <li><a href="<%= catLink %>"><%=catName%></a></li>
+        </ul>
+        <a href="<%= articleLink %>">
+            <%-title%>
+        </a>
+        <ul class="meta">
+            <li><a href="<%= _template.standardizeLink('') %>"><span class="lnr lnr-user"></span><%=username%></a></li>
+            <li><a href="<%= _template.standardizeLink('') %>"><span class="lnr lnr-calendar-full"></span><%=time%></a></li>
+        </ul>
+    </div>
+</div>

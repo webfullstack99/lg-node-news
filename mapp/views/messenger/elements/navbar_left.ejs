@@ -1,0 +1,16 @@
+<% 
+    const _helper = require(__path.helper+'/helper');
+    let messagesLink = _helper.standardizeLink(`${displayConf.prefix.mess}/messages/new`);
+    let roomsLink = _helper.standardizeLink(`${displayConf.prefix.mess}/rooms`);
+    let friendsLink = _helper.standardizeLink(`${displayConf.prefix.mess}/friends`);
+    let friendInvitationsLink = _helper.standardizeLink(`${displayConf.prefix.mess}/friend-invitations`);
+%> 
+<div class="collapse navbar-collapse pull-left" id="navbar-collapse">
+    <ul id= "navbar-menu" class="nav navbar-nav">
+        <li class=""><a href="<%=messagesLink%>">Messages</a></li>
+        <li class=""><a href="<%=roomsLink%>">Rooms</a></li>
+        <li class=""><a href="<%=friendsLink%>">Friends</a></li>
+        <li class=""><a href="<%=friendInvitationsLink%>">Friend invitations</a></li>
+        <%- include(__path.views_mess+'/elements/acp_navbar_left_link') %>
+    </ul>
+</div>

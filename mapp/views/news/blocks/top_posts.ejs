@@ -1,0 +1,26 @@
+<% if (featuredArticles.length > 0){ %>
+<div class="container no-padding">
+    <div class="row small-gutters">
+        <% if (featuredArticles.length == 1) { %> 
+            <div class="col-12 top-post-left">
+                <%-include(__path.views_news+'/partials/single_top_post', {item: featuredArticles[0], isBig: true})%>
+            </div>
+        <% } else if (featuredArticles.length == 2) { %>
+            <div class="col-lg-6 top-post-left">
+                <%-include(__path.views_news+'/partials/single_top_post', {item: featuredArticles[0], isBig: true})%>
+            </div>
+            <div class="col-lg-6 top-post-left">
+                <%-include(__path.views_news+'/partials/single_top_post', {item: featuredArticles[1], isBig: true})%>
+            </div>
+        <% } else { %>
+            <div class="col-lg-8 top-post-left">
+                <%-include(__path.views_news+'/partials/single_top_post', {item: featuredArticles[0], isBig: true})%>
+            </div>
+            <div class="col-lg-4 top-post-right">
+                <%-include(__path.views_news+'/partials/single_top_post', {item: featuredArticles[1]})%>
+                <%-include(__path.views_news+'/partials/single_top_post', {item: featuredArticles[2], marginTop: true})%>
+            </div>
+        <% } %>
+    </div>
+</div>
+<% } %>

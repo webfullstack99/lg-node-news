@@ -1,0 +1,15 @@
+<% if (flash.notify){ %>
+    <% 
+        let notify = flash.notify[0];
+        let content;
+        let classes;
+        let messages = conf.template.message;
+        
+        if (notify.type != 'custom'){
+            classes = messages[notify.type][notify.message].classes;
+            content = messages[notify.type][notify.message].content;
+        } else content = notify.message;
+    %> 
+
+    <%- include(__path.views+'/admin/template/alert.ejs', {id: 'form-alert', isShow: true, classes: classes, content: content}); %>
+<% } %>

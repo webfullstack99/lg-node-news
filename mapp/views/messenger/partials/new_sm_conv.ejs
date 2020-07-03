@@ -1,0 +1,6 @@
+<% 
+    const _helper = require(__path.helper+'/helper');
+    var receiver = receiver || false;
+    let item = _helper.getNewSmConvData(receiver);
+%> 
+<%- include(__path.views_mess+'/partials/sm_conv', {item}) %>

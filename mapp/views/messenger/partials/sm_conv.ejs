@@ -1,0 +1,66 @@
+<% 
+    const _helper = require(__path.helper+'/helper');
+    const _template = require(__path.helper+'/template');
+    var isForNotify = isForNotify || false;
+
+    let receiver;
+    if (item.msgType == 'custom') receiver = item;
+    else receiver = _helper.getReceiver(item, user.id);
+    
+    let thumb = '';
+    for (let i =0; i < receiver.thumb.length; i++){
+        let classes;
+        if (receiver.thumb.length == 1) classes = 'img-fluid';
+        else classes = (i == 0) ? 'group-img-left' : 'group-img-right';
+        thumb += _template.showThumb({
+            classes: classes,
+            thumb: receiver.thumb[i],
+            alt: 'user',
+            controller: 'user',
+        })
+    }
+
+    let smConvClass = '';
+    let msgClass = '';
+    let msgRightClass = 'visible-md visible-lg';
+    let messageLink = '';
+    let content = '';
+    let time = '';
+    if (item.msgType == 'custom'){
+        messageLink = _helper.standardizeLink('#');
+        smConvClass = 'new-msg'
+    }else{
+        let lastMsg = item.messages[0];
+
+        //content
+        let prefixContent = (lastMsg.user.equals(user.id)) ? 'You: ' : '';
+        content = prefixContent + _helper.limitString(item.messages[0].content, 25);
+
+
+        // messages
+        if (!isForNotify){
+            msgClass = (!lastMsg.seen.includes(user.id)) ? 'text-unseen' : '';
+        }
+
+        // time
+        time = _template.showLastMsgSmConvHistory({time: lastMsg.created});
+
+        //link
+        messageLink = `${_helper.standardizeLink(displayConf.prefix.mess)}/messages/${item.type[0]}/${receiver._id}`;
+    }
+%> 
+<a href="<%= messageLink %>" class="disable-default-effect">
+    <div class="sm-conv clearfix <%= smConvClass %>" data-type="p" data-convId="<%= receiver.convid %>">
+        <div class="sm-conv-left">
+            <%- thumb %>
+        </div>
+        <div class="sm-conv-right <%= msgRightClass %>">
+            <div class="sm-conv-name"><%- receiver.name %>
+                <% if (time) { %> 
+                    <span class="sm-conv-time"><i class="fa fa-clock-o"></i> <%= time %></span>
+                <% } %>
+            </div>
+            <div class="sm-conv-msg"><small class="sm-conv-main-msg <%= msgClass %>"><%= content %></small></div>
+        </div>
+    </div>
+</a>

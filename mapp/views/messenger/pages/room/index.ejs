@@ -1,0 +1,31 @@
+<section class="content">
+    <div class="col-md-4">
+        <div class="row">
+
+            <!-- ROOM INFO -->
+            <%- include(__path.views_mess+'/blocks/room_info', {item: room}) %>
+        </div>
+        <div class="row">
+
+            <!-- USER ONLINE -->
+            <%- include(__path.views_mess+'/blocks/user_online_box', {title: 'Member online'}) %>
+        </div>
+
+    </div>
+    <div class="col-md-8 no-padding-right">
+        <!-- DIRECT CHAT -->
+        <%- include(__path.views_mess+'/blocks/direct_chat_box', {msgs: msgs}) %>
+    </div>
+
+    <!-- info inputs -->
+    <% 
+        let roomId = room._id;
+    %> 
+    <div class="input-container">
+        <%- include(__path.views_mess+'/blocks/info_inputs') %>
+        <input name="room" type="hidden" value="<%= roomId %>" />
+    </div>
+</section>
+
+<!-- my socket.io -->
+<script src="messenger_theme/js/my-socketio/room-socketio.js"></script>

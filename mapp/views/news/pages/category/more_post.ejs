@@ -1,0 +1,7 @@
+<% 
+    var outOfPost = outOfPost || false;
+%> 
+<% for (let item of articles){ %>
+    <%- include(__path.views_news+'/partials/single_post.ejs', {item: item}); %>
+<% } %>
+<input type="hidden" value="<%=outOfPost%>" />

@@ -1,0 +1,63 @@
+<% 
+    var title = title || 'Direct chat';
+    var titleType = titleType || 'normal';
+    var isNewMsgOnTop = isNewMsgOnTop || false;
+
+    switch (titleType) {
+        case 'user': 
+            title = include(__path.views_mess+'/partials/simple_user', {item: title, id: 'chatting-friend'});
+            break;
+    }
+%> 
+<div class="box box-primary direct-chat direct-chat-primary">
+    <div class="box-header with-border">
+        <h3 class="box-title"><%- title %></h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body direct-chat-box">
+        <!-- Conversations are loaded here -->
+        <div class="direct-chat-messages">
+            <% if (!isNewMsgOnTop) { %>
+                    <%- include(__path.views_mess+'/template/show_msgs', {msgs}) %>
+            <% } %>
+        </div>
+        <!--/.direct-chat-messages-->
+
+        <!-- Contacts are loaded here -->
+        <div class="direct-chat-contacts">
+            <ul class="contacts-list">
+                <li>
+                    <a href="#">
+                        <img class="contacts-list-img" src="messenger_theme/img/user1-128x128.jpg"
+                                alt="User Image">
+
+                        <div class="contacts-list-info">
+        <span class="contacts-list-name">
+            Count Dracula
+            <small class="contacts-list-date pull-right">2/28/2015</small>
+        </span>
+                            <span class="contacts-list-msg">How have you been? I was...</span>
+                        </div>
+                        <!-- /.contacts-list-info -->
+                    </a>
+                </li>
+                <!-- End Contact Item -->
+            </ul>
+            <!-- /.contatcts-list -->
+        </div>
+        <!-- /.direct-chat-pane -->
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer">
+        <form action="#" method="post" id="send-msg-form">
+            <div class="users-typing"></div>
+            <div class="input-group">
+                <input id="msg-input" type="text" name="message" placeholder="Type Message ..." class="form-control">
+                <span class="input-group-btn">
+                    <button id="msg-btn" class="btn btn-primary bg-fb-msg">&nbsp;<i class="fa fa-paper-plane"></i></button>
+                </span>
+            </div>
+        </form>
+    </div>
+    <!-- /.box-footer-->
+</div>

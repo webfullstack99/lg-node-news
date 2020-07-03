@@ -1,0 +1,43 @@
+<%
+    let Helper          = require(__path.helper+'/helper');
+    let pagination      = params.pagination; 
+    let paginator   = {
+        cp: params.urlParams.page,
+        pageRange: pagination.pageRange,
+        totalPage: pagination.totalPage,
+    }
+    let start;
+    if (paginator.cp <= Math.ceil(paginator.pageRange / 2)) start =1;
+    else if (paginator.cp > paginator.totalPage - (Math.floor(paginator.pageRange / 2))) start = paginator.totalPage - (Math.ceil(paginator.pageRange / 2));
+    else start = paginator.cp - Math.floor(paginator.pageRange / 2);
+    
+    let startLink   = Helper.getUrlWithNewParams({page: 1}, params.urlParams.originalUrl)
+    let prevLink    = Helper.getUrlWithNewParams({page: paginator.cp -1}, params.urlParams.originalUrl);
+    let nextLink    = Helper.getUrlWithNewParams({page: paginator.cp +1}, params.urlParams.originalUrl);
+    let endLink     = Helper.getUrlWithNewParams({page: paginator.totalPage}, params.urlParams.originalUrl);
+    let status;
+%>
+<nav aria-label="Page navigation example" class="float-right">
+    <ul class="pagination">
+        <%status = (paginator.cp <= 1 ) ? 'disabled': ''%>
+        <li class="page-item <%=status%>"><a class="page-link" href="<%=startLink%>"><span>Start</span></a></li>
+        <li class="page-item <%=status%>"><a class="page-link" href="<%=prevLink%>"><span>&laquo;</span></a></li>
+        <%for (let i = start; i < (start+paginator.pageRange); i++){%>
+        <%
+            if (i > paginator.totalPage) continue;
+            status  = (paginator.cp == i) ? 'active' : '';
+            let link    = Helper.getUrlWithNewParams({page: i}, params.urlParams.originalUrl);
+        %>
+            <li class="page-item <%=status%>"><a class="page-link" href="<%=link%>"><%=i%>  </a></li>
+        <%}%>
+        <%status = (paginator.cp == paginator.totalPage ) ? 'disabled': ''%>
+        <li class="page-item <%=status%>"><a class="page-link" href="<%=nextLink%>"><span>&raquo;</span></a></li>
+        <li class="page-item <%=status%>"><a class="page-link" href="<%=endLink%>"><span>End</span></a></li>
+    </ul>
+</nav>
+<div>
+    <div class="btn-group">
+        <button class="btn btn-primary btn-sm"><%=pagination.totalItems%> item</button>
+        <button class="btn btn-info btn-sm">Page <%=params.urlParams.page%>/<%=pagination.totalPage%></button>
+    </div>
+</div

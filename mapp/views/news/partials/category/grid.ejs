@@ -1,0 +1,59 @@
+<% 
+    const _template = require(__path.helper+'/template');
+    const _helper = require(__path.helper+'/helper');
+    let catLink = _helper.createFrontendLink({type: 'category', slug: cat.slug, id: cat._id});
+%> 
+<div class="container-fluid">
+    <!-- category title -->
+    <div class="row mb-1 my-5">
+        <div class=" col-12 d-flex align-items-start justify-content-start mb-1">
+            <div class="h2 pr-3" style="white-space: nowrap;"><%= cat.name %></div>
+            <div class="w-100" style="height:20px; background: #ebeded; margin-top:5px"></div>
+        </div>
+    </div>
+
+    <!-- article posts -->
+    <div class="single-post row">
+    <% for (let item of cat.articles){ %>
+            <%
+            let thumb = _template.showThumb({
+                thumb: item.thumb,
+                alt: item.title,
+                controller: 'article',
+            });
+            let time = _template.showItemFrontendHistory( {time: item.created.time} );
+            let description = _helper.limitString(item.content.text, 200);
+            let articleLink = _helper.createFrontendLink({type: 'article', slug: item.slug, id: item._id});
+            %>
+            <div class="col-lg-6 m-0 mb-2 mb-lg-0 p-0">
+                <div class="col-12 post-top mb-2">
+                    <div class="feature-img relative">
+                        <div class="overlay overlay-bg"></div>
+                        <%- thumb %>
+                    </div>
+                    <ul class="tags">
+                        <%
+                        let catLink = _helper.createFrontendLink({type: 'category', slug: cat.slug, id: cat._id});
+                        %> 
+                        <li><a href="<%=catLink%>"><%=cat.name%></a></li>
+                    </ul>
+                </div>
+                <div class="col-12 post-bottom">
+                    <a href="<%= articleLink %>">
+                        <h4><%= item.title %></h4>
+                    </a>
+                    <ul class="meta">
+                        <li><a href="<%= _template.standardizeLink('') %>"><span class="lnr lnr-user"></span><%= item.created.username %></a></li>
+                        <li><a href="<%= _template.standardizeLink('') %>"><span class="lnr lnr-calendar-full"></span><%= time %></a></li>
+                    </ul>
+                    <p class="excert"><%= description %></p>
+                </div>
+            </div>
+    <% } %>
+    </div>
+
+    <!-- read more button -->
+    <div class="row my-3 my-lg-5">
+        <%- include(__path.views_news+'/partials/read_more_btn', {catLink: catLink}) %>
+    </div>
+</div>

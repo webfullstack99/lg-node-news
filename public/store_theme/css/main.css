@@ -1,0 +1,93 @@
+.bg-pink{
+    background:rgb(255,101,156);
+}
+
+.btn-pink{
+    color: #fff;
+    background:rgb(255,101,156);
+    border-color:rgb(255,101,156);
+}
+
+.btn-outline-pink{
+    color: rgb(255,101,156);
+    background-color: transparent;
+    background-image: none;
+    border-color: rgb(255,101,156);
+    border-top-color: rgb(255,101,156);
+    border-right-color: rgb(255,101,156);
+    border-bottom-color: rgb(255,101,156);
+    border-left-color: rgb(255,101,156);
+}
+
+.pink-hover{
+    color: #fff !important;
+    background-color: rgb(255,101,156) !important;
+    border-color: rgb(255,101,156) !important;
+}
+
+.btn-outline-pink:hover{
+    color: #fff;
+    background-color: rgb(255,101,156);
+    border-color: rgb(255,101,156);
+}
+
+/* fonts size responsive */
+.myfa-15-lg-2x{
+    font-size: 1.5em;
+}
+
+/* makeup */
+#search-form{
+    top:3px;
+    left:25%;
+    position: absolute; 
+}
+
+/* effect */
+.hover-box-shadow:hover{
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3), 0 6px 25px rgba(0, 0, 0, 0.2);
+}
+
+.hover-border-pink:hover{
+    border: 1px solid rgb(255,101,156);
+}
+
+/* responsive */
+/* sm */
+@media only screen and (max-width: 767.98px){
+    #search-form input.form-control{
+        display: inline-block !important;
+        height:38px !important;
+    }
+
+    #search-form .input-group-append a#search-btn{
+        margin: 0px !important;
+    }
+}
+
+/* md */
+@media only screen and (min-width: 768px) and (max-width: 991.98px){
+    #search-form{
+        left:30%;
+    }
+}
+
+/* lg */
+@media only screen and (min-width: 992px){
+    #search-form input.form-control{
+        line-height: 1em !important;
+    }
+
+    #search-form{
+        position: static;
+    }
+    
+    /* font-size */
+    .myfa-15-lg-2x{
+        font-size: 2em;
+    }
+}
+
+/* xl */
+@media only screen and (min-width: 1200){
+}

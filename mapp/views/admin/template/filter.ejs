@@ -1,0 +1,13 @@
+<div class="row">
+    <!-- Title -->
+    <%- include(__path.views+'/admin/template/x-title.ejs', {title: 'filter'}); %>
+
+    <div class="col-12 collapse show" id="filter-collapse">
+        <div class="row">
+            <!-- Atribute -->
+            <%- include(__path.views+'/admin/template/attribute_filter.ejs'); %>
+            <!-- Search -->
+            <%- include(__path.views+'/admin/template/search_filter.ejs'); %>
+        </div>
+    </div>
+</div>

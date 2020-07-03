@@ -1,0 +1,7 @@
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <%- include(__path.views+'/admin/template/heading.ejs', {isIndexPage: true}); %>
+</div>
+
+<%- contentFor('hiddenInput') %>
+<input type="hidden" name="controller" value="<%=controller%>">

@@ -1,0 +1,48 @@
+<% 
+    var item = item || {};
+    let formAction = `${controller}/register`;
+    let isShow = false;
+    let classes = '';
+    var errors = errors || [];
+    
+    if (flash.error && errors.length < 1){
+        isShow = true;
+        classes = 'alert alert-danger col-12';
+        for (let item of flash.error){
+            errors.push({param: '', msg: item});
+        }
+    }
+%> 
+<div class="container-fluid bg-white pt-3">
+    <div class="row">
+        <div class="offset-0 offset-lg-2 col-lg-8">
+            <%- include(__path.views_auth+'/frontend/template/heading', {title: 'Quick register'}) %>
+            <form method="post" action="<%= formAction %>" >
+                <%- include(__path.views+'/admin/template/show-form-errors.ejs', {errors: errors}) %>
+                <div class="form-group row">
+                    <label for="inputUsername" class="col-sm-2 col-form-label">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="inputUsername"  required="required" name="username" value="<%= item.username %>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="inputEmail" required="required" name="email" value="<%= item.email %>">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label" required="required" >Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPassword" name="password" >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 offset-0 offset-sm-2">
+                        <button class="btn btn-dark btn-block">Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

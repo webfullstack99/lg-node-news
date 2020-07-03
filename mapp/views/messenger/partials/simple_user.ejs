@@ -1,0 +1,37 @@
+<%
+    const _template = require(__path.helper+'/template');
+    let thumb = '';
+    let name = '';
+    if (Array.isArray(item.thumb)){
+        name = item.name;
+        for (let i =0; i < item.thumb.length; i++){
+            let classes;
+            if (item.thumb.length == 1) classes = 'img-fluid';
+            else classes = (i == 0) ? 'group-img-left' : 'group-img-right';
+            thumb += _template.showThumb({
+                classes: classes,
+                thumb: item.thumb[i],
+                alt: item.name,
+                controller: 'user',
+            })
+        }
+    }else{
+        name = item.username;
+        thumb = _template.showThumb({
+            classes: 'img-fluid',
+            thumb: item.thumb,
+            alt: item.username,
+            controller: 'user',
+        })
+    } 
+    var isNotStringifyUserId = isNotStringifyUserId || false;
+    let dataUserId = (isNotStringifyUserId) ? item.ids : JSON.stringify(item.ids);
+    var content = content || name;
+    var collapseContent = collapseContent || '';
+    if (collapseContent == 'lg') collapseContent = 'visible-md visible-lg';
+    var id = (id) ? `id=${id}` : '';
+%>
+<div  <%= id %> class="simple-user clear-fix" data-username="<%= name %>" data-userid="<%= dataUserId %>">
+    <span class="s-u-thumb"><%- thumb %></span>
+    <span class="s-u-content <%= collapseContent %>"><%= content %></span>
+</div>

@@ -1,0 +1,17 @@
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <%- include(__path.views+'/admin/template/heading.ejs', {isIndexPage: true}); %>
+    
+    <!-- Content -->
+    <div class="row">
+        <div class="col-12">
+            <p class="lead">
+                You do not have permission to access this feature!
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<%- contentFor('hiddenInput') %>
+<input type="hidden" name="controller" value="<%=controller%>">

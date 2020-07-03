@@ -1,0 +1,29 @@
+<% 
+    const _helper = require(__path.helper+'/helper');
+
+    let xStringArr = (invitationType == 'receive') ? ['friend', 'sent'] : ['sent', 'friend'];
+    let title = `Your ${xStringArr[0]} invitations`;
+
+    // link
+    let link = _helper.standardizeLink(`${displayConf.prefix.mess}/friend-invitations`)
+    if (invitationType == 'receive') link += '/sent';
+    let append = `<small><a href="${link}">View your ${xStringArr[1]} invitations</a></small>`;
+
+    let classType = (invitationType == 'receive') ? '' : '-sent';
+    let boxId = `user${classType}-invitations-box`;
+%> 
+<div class="main-content">
+    <!-- user rooms -->
+    <%- include(__path.views_mess+'/template/x-title', {title, id: `${boxId}-title`, append, badgeContent: friendRequests.length}) %>
+
+    <div class="box-body">
+        <div id="<%=boxId%>" class="row">
+            <% for (let item of friendRequests) { %>
+                    <%- include(__path.views_mess+'/partials/single_user.ejs', {item, relationship: `${invitationType}-invite`, userType: 'user-normal'}) %>
+            <% } %>
+        </div>
+    </div>
+
+    <!-- all rooms -->
+    <%- include(__path.views_mess+'/blocks/friend_suggestions_box', {friendSuggestions}) %>
+</div>

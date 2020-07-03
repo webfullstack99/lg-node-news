@@ -1,0 +1,10 @@
+<% var user = user || {}; let prfAuth = displayConf.prefix.auth; %>
+<% if (Object.keys(user) < 1) { %>
+        <li name="<%= prfAuth %>/register"><a href="<%= prfAuth %>/register">Register</a></li>
+        <li name="<%= prfAuth %>/login"><a href="<%= prfAuth %>/login">Login</a></li>
+<% }else{ %> 
+        <% if (user.group.groupAcp == 'yes') { %>
+            <li><a href="<%= displayConf.prefix.admin %>">Admin control panel</a></li>
+        <% } %> 
+        <li><a href="<%= prfAuth %>/logout">Logout</a></li>
+<% } %>

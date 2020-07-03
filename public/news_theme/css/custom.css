@@ -1,0 +1,24 @@
+.latest-posts img{
+    width: 100px !important;
+    height: 80px !important;
+    object-fit: contain;
+}
+
+.menu-active a{
+    font-weight: bold;
+    color: #f6214b:
+}
+
+ul.news-menu > li:hover > a{
+    font-weight: bold;
+    color: #f6214b;
+}
+
+.text-special-red{
+    color: #f6214b;
+}
+
+.text-special-red:hover{
+    color: #f6214b;
+    text-decoration: underline;
+}

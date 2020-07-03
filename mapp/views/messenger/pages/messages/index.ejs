@@ -1,0 +1,34 @@
+<% 
+    var isNewMsgOnTop = isNewMsgOnTop || false;
+%> 
+<section class="content">
+    <div class="col-xs-2 col-md-3 no-padding-left">
+        <%- include(__path.views_mess+'/blocks/recent_conversations_box', {recentConversations, isNewMsgOnTop}) %>
+    </div>
+    <div class="col-xs-10 col-md-9 no-padding-left">
+
+        <!-- DIRECT CHAT -->
+        <div class="direct-chat-area">
+            <%- include(__path.views_mess+'/blocks/direct_chat_box', {msgs: currentConversation.messages, title: friend, titleType: 'user', isNewMsgOnTop}) %>
+            <% if (isNewMsgOnTop) { %> 
+                    <%- include(__path.views_mess+'/template/receiver_form') %>
+            <% } %>
+        </div>
+    </div>
+
+    <!-- info inputs -->
+    <% 
+        let roomId = currentConversation._id;
+    %> 
+    <div class="input-container">
+        <%- include(__path.views_mess+'/blocks/info_inputs') %>
+        <input name="room" type="hidden" value="<%= roomId %>" />
+    </div>
+</section>
+
+<!-- my socket.io -->
+<% if (isNewMsgOnTop) { %> 
+        <script src="messenger_theme/js/my-socketio/new-conv-socketio.js"></script>
+<% }else{ %>
+        <script src="messenger_theme/js/my-socketio/room-socketio.js"></script>
+<% } %>

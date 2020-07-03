@@ -1,0 +1,117 @@
+<% 
+    const _helper = require(__path.helper+'/helper');
+    let sidebarData = [
+        {
+            name: 'Manage item',
+            icon: 'far fa-list fw',
+            pages: [
+                {name: 'Item', controller: 'item', icon: ''},
+                {name: 'Category', controller: 'category', icon: 'far fa-list-alt'},
+                {name: 'Article', controller: 'article', icon: 'far fa-newspaper'},
+                {name: 'Room', controller: 'room', icon: 'far fa-users-class'},
+            ],
+        }, {
+            name: 'Manage user',
+            icon: 'far fa-list fw',
+            pages: [
+                {name: 'Group', controller: 'group', icon: 'far fa-users'},
+                {name: 'User', controller: 'user', icon: 'far fa-user'},
+            ],
+        }, {
+            name: 'Setting',
+            icon: 'far fa-cog',
+            pages: [
+                {name: 'Get data', controller: 'get-data', icon: 'far fa-file-chart-line'},
+            ],
+        },     
+    ];
+
+%>
+<script>
+    let w = window.innerWidth;
+    if (w < 768) document.write('<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">');
+    else document.write('<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">');
+</script>
+<!-- Sidebar brand -->
+<!-- Sidebar - Brand -->
+<a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin_theme/index.html">
+    <div class="sidebar-brand-icon rotate-n-15">
+        <i class="far fa-laugh-wink"></i>
+    </div>
+    <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+</a>
+
+<!-- Divider -->
+<hr class="sidebar-divider my-0">
+
+<!-- Nav Item - Dashboard -->
+<li class="nav-item" name="dashboard">
+    <a class="nav-link w-100" href="<%= displayConf.prefix.admin%>">
+        <i class="far fa-fw fa-tachometer-alt"></i>
+        <span class="d-inline">Dashboard</span>
+    </a>
+</li>
+<!-- Heading -->
+<hr class="sidebar-divider">
+<!-- desktop -->
+<div class="d-none d-lg-block">
+    <% for (let item of sidebarData) { %>
+    <% 
+                let slug = _helper.slug(item.name);
+            %>
+    <li class="nav-item page-group-sidebar">
+        <a class="nav-link pb-0" href="#<%=slug%>-collapse" data-toggle="collapse">
+            <i class="<%=item.icon%>"></i>
+            <span><%=item.name%></span>
+        </a>
+        <ul style="list-style-type: none;" class="pl-lg-2 collapse show" id="<%=slug%>-collapse">
+            <% for (let page of item.pages) { %>
+            <li class="nav-item" name="<%=page.controller%>">
+                <a class="nav-link" href="<%=displayConf.prefix.admin%>/<%=page.controller%>">
+                    <i class="<%=page.icon%>"></i>
+                    <span><%=page.name%></span>
+                </a>
+            </li>
+            <% } %>
+        </ul>
+    </li>
+    <% } %>
+</div>
+
+<!-- mobile -->
+<div class="d-lg-none">
+    <% for (let item of sidebarData) { %>
+    <% 
+                let slug = _helper.slug(item.name);
+            %>
+    <li class="nav-item page-group-sidebar">
+        <a class="nav-link w-100 switch-caret-vertical" data-toggle="collapse" href="#<%=slug%>">
+            <div class="d-flex">
+                <i class="<%=item.icon%> pr-1"></i>
+                <span>
+                    <%=item.name%>
+                    <i class="far fa-caret-down text-white"></i>
+                </span>
+            </div>
+        </a>
+        <ul class="ml-3 nav-bar collapse list-unstyled show" id="<%=slug%>">
+            <% for (let page of item.pages) { %>
+            <li class="nav-item" name="<%=page.controller%>">
+                <a class="nav-link" href="<%= displayConf.prefix.admin%>/<%=page.controller%>">
+                    <i class="<%=page.icon%>"></i>
+                    <span class="d-inline"> <%=page.name%> </span>
+                </a>
+            </li>
+            <% } %>
+        </ul>
+    </li>
+    <% } %>
+</div>
+
+<!-- Sidebar Toggler (Sidebar) -->
+<div class="mt-5 mt-lg-3 text-center d-none d-md-inline">
+    <button class="rounded-circle border-0 switch-caret-horizontal" id="sidebarToggle">
+        <span><i class="fas fa-caret-left text-white"></i></span>
+    </button>
+</div>
+</ul>

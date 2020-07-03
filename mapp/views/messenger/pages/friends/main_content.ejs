@@ -1,0 +1,15 @@
+<div class="main-content">
+    <!-- user rooms -->
+    <%- include(__path.views_mess+'/template/x-title', {title: `Your friends`, id: 'user-friends-box-title', badgeContent: friends.length}) %>
+    <div class="box-body">
+        <div id="user-friends-box" class="row">
+            <% for (let item of friends) { %>
+                    <%- include(__path.views_mess+'/partials/single_user.ejs', {item, relationship: 'friend', userType: 'user-friendx'}) %>
+            <% } %>
+        </div>
+    </div>
+
+    <!-- all rooms -->
+    <%- include(__path.views_mess+'/blocks/friend_suggestions_box', {friendSuggestions}) %>
+
+</div>

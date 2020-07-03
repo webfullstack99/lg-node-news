@@ -1,0 +1,19 @@
+<%
+var isDashboard     = isDashboard || false;
+var isIndexPage     = isIndexPage || false;
+%>
+
+<div class="d-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800"><%= pageTitle%></h1>
+        <% if (!isDashboard) {%>
+            <% if (isIndexPage){%>
+                <a class="btn btn-primary" href="<%= displayConf.prefix.admin%>/<%=controller%>/form">
+                    <i class="fal fa-plus-circle"></i>&nbsp;Add
+                </a>
+            <%}else{%>
+                <a class="btn btn-dark" href="<%= displayConf.prefix.admin%>/<%=controller%>">
+                    <i class="fas fa-hand-point-left"></i>&nbsp;Back
+                </a>            
+            <%}%>  
+        <%}%>
+</div>

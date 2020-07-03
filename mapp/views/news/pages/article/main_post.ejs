@@ -1,0 +1,37 @@
+<% 
+    let item = mainArticle;
+    const _template = require(__path.helper+'/template');
+    const _helper = require(__path.helper+'/helper');
+    let thumb = _template.showThumb({
+        thumb: item.thumb,
+        alt: item.title,
+        controller: 'article',
+    });
+    let time = _template.showItemFrontendHistory( {time: item.created.time} );
+    let catLink = _helper.createFrontendLink({type: 'category', slug: item.cat.slug, id: item.cat.id});
+    let articleLink = _helper.createFrontendLink({type: 'article', slug: item.slug, id: item._id});
+%> 
+<div class="feature-img-thumb relative">
+    <div class="overlay overlay-bg"></div>
+    <%- thumb %>
+</div>
+<div class="content-wrap">
+    <ul class="tags mt-10">
+        <li><a href="<%= catLink %>"><%=item.cat.name%></a></li>
+    </ul>
+    <a href="#">
+        <h3><%= item.title %></h3>
+    </a>
+    <ul class="meta">
+        <li><a href="#"><span class="lnr lnr-user"></span><%= item.created.username %></a></li>
+        <li><a href="#"><span class="lnr lnr-calendar-full"></span><%= time %></a></li>
+    </ul>
+    <p><%- item.content.html %></p>
+    <!--
+    <div class="navigation-wrap justify-content-between d-flex">
+        <a class="prev" href="#"><span class="lnr lnr-arrow-left"></span>Prev Post</a>
+        <a class="next" href="#">Next Post<span class="lnr lnr-arrow-right"></span></a>
+    </div>
+
+    -->
+</div>

@@ -1,0 +1,57 @@
+<% 
+    var item = item || {};
+    let formAction = `${displayConf.prefix.auth}/login`;
+    let isShow = false;
+    let classes = '';
+    var errors = errors || [];
+    
+    if (flash.error && errors.length < 1){
+        isShow = true;
+        classes = 'alert alert-danger col-12';
+        for (let item of flash.error){
+            errors.push({param: '', msg: item});
+        }
+    }
+%> 
+<div class="container-fluid bg-white pt-3">
+    <div class="row">
+        <div class="offset-0 offset-lg-2 col-lg-8">
+            <%- include(__path.views_auth+'/frontend/template/heading', {title: 'Login'}) %>
+            <form method="post" action="<%= formAction %>">
+                <%- include(__path.views+'/admin/template/show-form-errors.ejs', {errors: errors}) %>
+                <div class="form-group row">
+                    <label for="username" class="col-sm-2 col-form-label">Username</label>
+                    <div class="col-sm-10">
+                        <input required="required" type="text" class="form-control" id="username" name="username" value="<%= item.username %>">
+                        <a id="anotherLoginBy" href="#" class="text-special-red">Login with <span>email</span></a>
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="password" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input required="required" type="password" class="form-control" id="password" name="password" >
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="d-flex flex-row justify-content-between col-12 align-items-center">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck" name="rememberMe">
+                            <label class="custom-control-label" for="customCheck">Remember me?</label>
+                        </div>
+                        <div class="div"><a href="#" data-target="#forgot-pass-modal" data-toggle="modal" class="text-dark font-weight-bold">Forgot password?</a></div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6 offset-0 offset-sm-2">
+                        <input type="hidden" name="loginBy" value="username">
+                        <button class="btn btn-dark btn-block">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Forgot pass modal -->
+<%- include(__path.views+'/template/forgot_password_modal') %>

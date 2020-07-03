@@ -1,0 +1,8 @@
+<% if (latestArticles.length > 0){ %>
+        <div class="single-sidebar-widget most-popular-widget latest-posts">
+            <h6 class="title">Latest posts</h6>
+            <% for (let item of latestArticles){ %>
+                    <%- include(__path.views_news+'/partials/single_list_post.ejs', {item: item}); %>
+            <% } %>
+        </div>
+<% } %>

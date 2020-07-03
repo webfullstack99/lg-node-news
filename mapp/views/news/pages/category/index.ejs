@@ -1,0 +1,13 @@
+    <!-- Start latest-post Area -->
+    <div class="latest-post-wrap">
+        <h4 class="cat-title"><%= articlesInCat[0].category.name %></h4>
+        <div id="post-in-cat-wrapper" load-posts="active" catId="<%= articlesInCat[0].category.id %>" link="<%= displayConf.prefix.frontend.category %>/load_more">
+            <% for (let item of articlesInCat){ %>
+                    <%- include(__path.views_news+'/partials/single_post.ejs', {item: item}); %>
+            <% } %>
+        </div>
+        <div class="load-more-container d-block d-lg-none text-center">
+            <button id="load-more-btn" class="btn btn-danger rounded-0 py-2 px-3">Load More Posts</button>
+        </div>
+    </div>
+    <!-- End latest-post Area -->

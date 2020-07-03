@@ -1,0 +1,48 @@
+<% 
+    const _helper = require(__path.helper+'/helper');
+    const _template = require(__path.helper+'/template');
+    let receiver = _helper.getReceiver(item, user.id);
+    let lastMsg = item.messages[0];
+
+    let thumb = '';
+    for (let i =0; i < receiver.thumb.length; i++){
+        let classes;
+        if (receiver.thumb.length == 1) classes = 'img-fluid';
+        else classes = (i == 0) ? 'inbox-group-img-left' : 'inbox-group-img-right';
+        thumb += _template.showThumb({
+            classes: classes,
+            thumb: receiver.thumb[i],
+            alt: 'user',
+            controller: 'user',
+        })
+    }
+
+    // content
+    let prefixContent = (lastMsg.user.equals(user.id)) ? 'You: ' : '';
+    content = prefixContent + _helper.limitString(item.messages[0].content, 40);
+
+    // time
+    let time = _template.showLastMsgSmConvHistory({time: lastMsg.created});
+    
+    // class
+    let msgClass = (!lastMsg.seen.includes(user.id)) ? 'text-unseen' : '';
+
+    //link
+    let messageLink = `${_helper.standardizeLink(displayConf.prefix.mess)}/messages/${item.type[0]}/${receiver._id}`;
+    let isSeen = (lastMsg.seen.includes(user.id)) ? 'yes' : 'no';
+%> 
+<li><!-- start message -->
+    <a href="<%= messageLink %>">
+        <div class="pull-left inbox-sm-conv" data-convid="<%= item._id %>" data-isseen="<%= isSeen %>">
+            <!-- User Image -->
+            <%- thumb %>
+        </div>
+        <!-- Message title and timestamp -->
+        <h4>
+            <%= receiver.name %>
+            <small><i class="fa fa-clock-o"></i> <%= time %></small>
+        </h4>
+        <!-- The message -->
+        <p class="<%= msgClass %>"><%= content %></p>
+    </a>
+</li>

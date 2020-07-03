@@ -1,0 +1,35 @@
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <%- include(__path.views+'/admin/template/heading.ejs'); %>
+        
+
+    <!-- _form -->
+    <div class="row">
+        <!-- Title -->
+        <%- include(__path.views+'/admin/template/x-title.ejs', {title: 'form'}); %>
+        <!-- Main _form -->
+        <div class="col-12 collapse show" id="form-collapse">
+            <!-- Alert -->
+            <div class="row">
+                <div class="col-12">
+                    <%- include(__path.views+'/flash'); %>
+                </div>
+            </div>
+            <!-- _form -->
+             <div class="row">
+                <% if (formType == 'insert'){ %>
+                        <div class="offset-0 offset-lg-3 col-lg-6">
+                            <%- include('./form/insert_form') %>
+                        </div>
+                <% }else{ %>
+                        <div class="offset-0 offset-lg-1 col-lg-10">
+                            <%- include('./form/edit_form') %>
+                        </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- contentFor('hiddenInput') %>
+<input type="hidden" name="controller" value="<%=controller%>">

@@ -1,0 +1,30 @@
+<% 
+    const _template = require(__path.helper+'/template');
+    const _helper = require(__path.helper+'/helper');
+    let name = item.name;
+    let thumb = _template.showThumb({
+        classes: 'img-circle',
+        thumb: item.thumb,
+        alt: name,
+        controller: 'room',
+    })
+    let roomLink = _helper.standardizeLink(`${displayConf.prefix.mess}/room/${item._id}`);
+%> 
+<div class="box box-widget widget-user-2">
+    <!-- Add the bg color to the header using any of the bg-* classes -->
+    <div class="widget-user-header bg-light-blue">
+        <div class="widget-user-image">
+            <%- thumb %>
+        </div>
+        <!-- /.widget-user-image -->
+        <h3 class="widget-user-username"><%= name %></h3>
+
+    </div>
+    <div class="box-footer no-padding">
+        <ul class="nav nav-stacked">
+            <li><a href="#">Members <span id="total-room-member" class="pull-right badge bg-fb-blue">0</span></a></li>
+            <li><a href="#">Language <span class="pull-right badge bg-aqua">PHP</span></a></li>
+            <li><a href="#">Category<span class="pull-right badge bg-green">Education</span></a></li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<% 
+    var title = title || '';
+    var append = append || '';
+    var id = id || '';
+    let titleId = (id) ? `id=${id}` : '';
+    var badgeContent = badgeContent || 0;
+%> 
+<div class="box-header with-border">
+    <p <%= titleId %> >
+        <%- title %> 
+        <%- include(__path.views_mess+'/template/badge', {content: badgeContent}) %>
+    </p>
+    <% if (append) { %>
+        <%- append %>
+    <% } %>
+</div>

@@ -1,0 +1,57 @@
+<% 
+    let _template = require(__path.helper+'/template'); 
+    let _form = require(__path.helper+'/form');
+    let _helper = require(__path.helper+'/helper');
+
+    let generateFilter = function (filterType, filter, data){
+        let xhtml;
+        switch (filterType) {
+            case 'button':
+                xhtml = _template.showButtonFilter({field: filter, data: data, params: params});
+                break;
+            case 'select':
+                let selectData = solveSelectCount(data);
+                let filtering = params.urlParams.select_filter[filter] 
+                let selected = (filtering) ? filtering : 'default';
+                xhtml = `<div field="${filter}" class="extra-select-filter w-100" >`;
+                xhtml += _form.select('', selectData, selected, {class: 'form-control'});
+                xhtml += '</div>';
+                break;
+        }
+        return xhtml;
+    }
+
+    let solveSelectCount = function (data){
+        let count = {};
+        for (let value of data.count){
+            count[value._id] = value.count;
+        }
+        let selectData = {};
+        let defaultKey = (data.data.default) ? 'default' : 'all';
+        if (data.data[defaultKey]) selectData.all = data.data[defaultKey];
+        for (let key in data.data){
+            if (count[key]){
+                let value = `${data.data[key]} (${count[key]})`;
+                selectData[key] = value;
+            } 
+        }
+        return selectData;
+    }
+%>
+<div class="col-md-6">
+    <%  for (let filterType in filterData){  
+            for (let filter in filterData[filterType]){
+                let filterName = _helper.ucfirst(filter.replace(/\..*$/, ''));
+                let data = filterData[filterType][filter];
+                let xhtml = generateFilter(filterType, filter, data); %>
+                    <div class="row mb-1">
+                        <div class="col-2 col-md-3 offset-1 d-flex align-items-center">
+                            <%=filterName%>
+                        </div>
+                        <div class="col-9 col-md-8 d-flex align-items-center">
+                            <%-xhtml%>
+                        </div>
+                    </div>
+            <% } %>
+    <%  } %>
+</div>

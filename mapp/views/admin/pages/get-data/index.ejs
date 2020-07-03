@@ -1,0 +1,47 @@
+<% 
+    let Helper = require(__path.helper+'/helper.js');
+    //var jsonData = jsonData || '';
+    let formAction  = Helper.getUrl(displayConf.prefix.admin, controller, '');
+    let collections = Helper.getCollections();
+%>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <h3><%= pageTitle %></h3>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <!-- CONTROL -->
+        <div class="col-12">
+
+            <!-- FORM -->
+            <div>
+                <form class="form-inline" method="post" action="<%=formAction%>">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <div class="form-group">
+                            <label for=""></label>
+                            <select class="custom-select" name="collection" id="">
+                                <option disabled selected>Select collection</option>
+                                <% for (let key in collections) { %>
+                                <option value="<%=key%>"><%=Helper.ucfirst(collections[key])%></option>
+                                <% } %>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Get</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- RESULT --> <!-- 
+        <div class="col-lg-9">
+            <div>
+                <textarea class="form-control" rows="10"></textarea>
+            </div>
+        </div>
+        -->
+    </div>
+
+
+</div>

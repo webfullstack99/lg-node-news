@@ -1,0 +1,156 @@
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <%- include(__path.views+'/admin/template/heading.ejs', {isIndexPage: true}); %>
+
+    <!-- Raw articles -->
+    <div class="row">
+        <div class="col-12">
+            <a href="<%=displayConf.prefix.admin%>/<%=controller%>/raw_articles" class="btn btn-danger float-right btn-sm">Raw articles</a>
+        </div>
+    </div>
+
+    <!-- Filter -->
+    <%- include(__path.views+'/admin/template/filter.ejs') %>
+
+    <!-- List -->
+    <div class="row">
+        <!-- Title -->
+        <%- include(__path.views+'/admin/template/x-title.ejs', {title: 'list'}); %>
+
+        <div class="col-12">
+            <div class="collapse show active" id="list-collapse">
+                <!-- Alert -->
+                <%- include(__path.views+'/admin/template/alert.ejs', {id: 'list-alert', content: 'empty'}); %>
+                <%- include(__path.views+'/flash'); %>
+                
+                <!-- Multi -->
+                <%- include(__path.views+'/admin/template/change-multi.ejs') %>
+                <form action="#" method="post" id="main-form">
+                    <table id="list-table" class="table table-hover table-responsive-lg">
+                        <caption>List of items</caption>
+                        <thead class="thead-light">
+                            <tr>
+                                <%
+                                    var theadData   = [
+                                        {column: '', title: '<input type="checkbox" id="checkall" />', width: '2%', isSort: false},
+                                        {column: '', title: '#', width: '', isSort: false},
+                                        {column: 'title', title: 'Article info', width: '20%', isSort: true},
+                                        {column: 'category.name', title: 'Category', width: '', isSort: true},
+                                        {column: 'type', title: 'Type', width: '', isSort: true},
+                                        {column: 'status', title: 'Status', width: '', isSort: true},
+                                        {column: 'ordering', title: 'Ordering', width: '', isSort: true},
+                                        {column: 'created.time', title: 'Created', width: '', isSort: true},
+                                        {column: 'modified.time', title: 'Modified', width: '', isSort: true},
+                                        {column: '', title: 'Action', width: '10%', isSort: false},
+                                    ];
+                                %>
+                                <%- include(__path.views+'/admin/template/thead-data', {theadData: theadData}) %>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% 
+                                if (items.length > 0){
+                                    let _highlight   = require(__path.helper+'/highlight');
+                                    let _template    = require(__path.helper+'/template');
+                                    let _form        = require(__path.helper+'/form');
+                                    let _helper      = require(__path.helper+'/helper');
+                                    let order        = 0;
+                                    for (let item of items){ 
+                                        let title   = _highlight.highlight(params.urlParams.search, {field: 'title', value: _helper.limitString(item.title, 40)});
+                                        let content = '...';
+                                        let thumb       = _template.showThumb({
+                                            thumb: item.thumb,
+                                            alt: item.title,
+                                            controller: controller,
+                                        })
+                                        let category       = _template.showItemSelect({
+                                            controller: controller,
+                                            field: 'category',
+                                            value: item.category.id,
+                                            id: item.id,    
+                                            selectData: categorySelectData,
+                                            attr: {class: 'form-control', field: 'category', style: 'min-width: 100px !important'},
+                                        });
+                                        let status  = _template.showItemAttrButton({
+                                            field: 'status',
+                                            value: item.status,
+                                            controller: controller,
+                                            id: item.id,
+                                        });  
+                                        let typeSelectData = _form.createSelectData(['type'], [false]).type;
+                                        let type       = _template.showItemSelect({
+                                            controller: controller,
+                                            field: 'type',
+                                            value: item.type,
+                                            id: item.id,    
+                                            selectData: typeSelectData,
+                                            attr: {class: 'form-control', field: 'type', style: 'min-width: 100px !important'},
+                                        });
+                                        let ordering  = _template.showItemOrdering({
+                                            ordering: item.ordering,
+                                            controller: controller,
+                                            id: item.id,    
+                                        });
+                                        let created = _template.showItemHistory( item.created );
+                                        let modified = _template.showItemHistory( item.modified );
+                                        let action  = _template.showItemAction({controller: controller, id: item.id}); 
+                                        order++;
+                            %>
+                                    <tr>
+                                        <th class="align-middle" scope="row">
+                                            <input type="checkbox" value="<%=item.id%>" name="id"/>
+                                        </th>
+                                        <th class="align-middle" scope="row"><%=order%></th>
+                                        <td class="align-middle" style="min-width:200px">
+                                            <p title="<%=item.title %>">
+                                                <strong>Title: </strong><%-title%><br/>
+                                            </p>
+                                            <p title="<%=item.content.text %>" style="max-width: 100px">
+                                                <%-thumb%>
+                                            </p>
+                                        </td>
+                                        <td class="align-middle"><%-category%></td>
+                                        <td class="align-middle"><%-type%></td>
+                                        <td class="align-middle"><%-status%></td>
+                                        <td class="align-middle"><%-ordering%></td>
+                                        <td class="align-middle"><%-created%></td>
+                                        <td class="align-middle"><%-modified%></td>
+                                        <td class="align-middle"><%-action%></td>
+                                    </tr>
+                            <%  
+                                }
+                            %>
+                                
+                            <%
+                                }else{
+                            %>
+                                <%- include(__path.views+'/admin/template/empty-list-notify', {colspan: 7}) %>
+                            <%
+                                }
+                            %>
+                            
+                        </tbody>
+                    </table>
+                    <input type="hidden" value="<%=params.urlParams.originalUrl%>" name="link" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    <%if (items.length > 0 && params.pagination.itemsPerPage < params.pagination.totalItems){%>
+        <div class="row">
+            <!-- Title -->
+            <%- include(__path.views+'/admin/template/x-title.ejs', {title: 'pagination'}); %>
+            <div class="col-12">
+                <div class="collapse show active" id="pagination-collapse">
+                    <!-- set total page -->
+                    <%- include(__path.views+'/admin/template/pagination.ejs'); %>
+                </div>
+            </div>
+        </div>
+    <%}%>
+</div>
+
+<%- contentFor('hiddenInput') %>
+<input type="hidden" name="controller" value="<%=controller%>">

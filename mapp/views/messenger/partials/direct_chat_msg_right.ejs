@@ -1,0 +1,22 @@
+<%
+    const _template = require(__path.helper+'/template');
+    var item = item || {created: {}};
+    //let thumb = _template.showThumb({
+        //classes: 'direct-chat-img',
+        //thumb: item.thumb,
+        //alt: item.created.username,
+        //controller: 'user',
+    //})
+    let created = _template.showMessengerMsgHistory({time: item.created});
+%>
+
+<div class="direct-chat-msg right">
+    <!-- 
+    <div class="direct-chat-info clearfix">
+        <span class="direct-chat-name pull-right"><%= item.user.username %></span>&nbsp;&nbsp;
+        <span class="direct-chat-timestamp pull-left"><%= created %></span>
+    </div>
+     -->
+    <%#- thumb %>
+    <div class="direct-chat-text" title="<%= created %>"><%- item.content %></div>
+</div>

@@ -1,0 +1,15 @@
+<%
+    const _template = require(__path.helper+'/template');
+    var username = username || '';
+    var thumb = thumb || '';
+    let avatar = _template.showThumb({
+        classes: 'direct-user-typing-img',
+        thumb: thumb,
+        alt: username,
+        controller: 'user',
+    })
+%>
+
+<div username="<%= username %>">
+    <%- avatar %> <img style="width:50px" src="messenger_theme/img/typing-dots.gif" alt="typing-image" /> 
+</div>

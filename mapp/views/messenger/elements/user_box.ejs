@@ -1,0 +1,47 @@
+<%
+    var userData = userData || {};
+    const _template = require(__path.helper+'/template');
+    let username = userData.username || 'No loggined';;
+    let thumb = _template.showThumb({
+        classes: 'img-fluid',
+        thumb: userData.thumb,
+        alt: userData.username || '',
+        controller: 'user',
+    })
+    let created = undefined;
+    if (user.created) created = _template.showMessengerUserHistory({time: userData.created.time});
+%>
+<li class="dropdown  user-menu">
+    <!-- Menu Toggle Button -->
+    <a href="#" class="dropdown-toggle user-dropdown-toggle" data-toggle="dropdown">
+        <!-- The user image in the navbar-->
+        <span style="display: inline-block; width: 30px;"><%- thumb %></span>
+        
+        <!-- hidden-xs hides the username on small devices so only the image appears. -->
+        <span class="visible-md visible-lg"><%= username %></span>
+    </a>
+    <ul class="dropdown-menu">
+        <!-- The user image in the menu -->
+        <li class="user-header">
+            <%-thumb%>
+            <p>
+                <%= username %>
+                <small>Member since <%= created %></small>
+            </p>
+        </li>
+
+        <!-- Menu Footer-->
+        <li class="user-footer">
+            <div class="pull-left">
+                <a href="#" class="btn btn-default btn-flat">Profile</a>
+            </div>
+            <div class="pull-right">
+                <%  
+                    let _helper = require(__path.helper+'/helper');
+                    let link = _helper.standardizeLink(`${displayConf.prefix.auth}/messenger/logout`);
+                %>
+                <a id="logout-btn" href="<%= link %>"  class="btn btn-default btn-flat">Logout</a>
+            </div>
+        </li>
+    </ul>
+</li>

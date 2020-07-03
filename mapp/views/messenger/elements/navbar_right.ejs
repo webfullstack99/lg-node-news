@@ -1,0 +1,13 @@
+<div class="navbar-custom-menu">
+    <ul class="nav navbar-nav">
+
+        <!-- Messages: style can be found in dropdown.less-->
+        <%- include(__path.views_mess+'/elements/navbar_right_message') %>
+
+        <!-- Notifications Menu -->
+        <%- include(__path.views_mess+'/elements/navbar_right_notification') %>
+
+        <!-- User Account Menu -->
+        <%- include(__path.views_mess+'/elements/user_box', {userData: user}) %>
+    </ul>
+</div>

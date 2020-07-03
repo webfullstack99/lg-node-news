@@ -1,0 +1,37 @@
+<!-- Search -->
+<div class="col-md-6 mt-2 mt-lg-0">
+    <div class="row">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-12 pr-lg-0 mr-lg-0">
+                    <form id="search-form">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="dropdown search-dropdown">
+                                    <!-- SEARCH -->
+                                    <% 
+                                        template            = conf.template.search;
+                                        let searchingField  = (params.urlParams.search.hasOwnProperty('field')) ? params.urlParams.search.field : 'all';                                                
+                                    %>
+                                    <button value="<%=searchingField%>" class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <%=template[searchingField]%>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <%let searchFieldList     = conf.template_config.search[controller];
+                                        for (let value of searchFieldList){%>
+                                            <a class="dropdown-item" href="#" value="<%=value%>"><%=template[value]%></a>                                                    
+                                        <%}%>
+                                    </div>
+                                </div>
+                            </div>
+                            <input id="search-input" type="text" class="form-control" value="<%=params.urlParams.search.value%>">
+                            <div class="input-group-append">
+                                <a href="javascript::void(0)" id="clear-btn" class="d-flex align-items-center btn btn-dark w-100"><i class="fas fa-times"></i></a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

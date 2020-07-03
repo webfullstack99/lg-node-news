@@ -1,0 +1,17 @@
+<%
+    var isShow  = isShow || false;
+    var showStr = (isShow) ? 'show' : '';
+    var classes   = classes || 'alert alert-success';
+    var notShowIcon = notShowIcon || false;
+%>
+
+<div id="<%=id%>" class="<%=classes%> <%=showStr%> collapse" role="alert">
+    <% if (!notShowIcon) { %>
+        <button class="close" data-toggle="collapse" data-target="#<%=id%>">
+            <span>&times;</span>
+        </button>
+    <% } %>
+    <p>
+        <%-content%>
+    </p>
+</div>

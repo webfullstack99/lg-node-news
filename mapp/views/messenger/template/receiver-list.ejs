@@ -1,0 +1,27 @@
+<% 
+    const _helper = require(__path.helper+'/helper');
+%> 
+<% if (receivers.length > 0) { %>
+        <li><span class="receiver-menu-title">Friend</span></li>
+        <% for (let item of receivers){ %>
+                <% 
+                    item.ids = item._id; 
+                    let link = _helper.standardizeLink('#');
+                %> 
+                <li><a class="single-receiver-in-dropdown" href="<%= link %>" data-userid="<%= item._id %>"><%- include(__path.views_mess+'/partials/simple_user', {item}) %></a></li>
+        <% } %>
+
+        <!-- GROUP CONVERSATION -->
+        <% if (convs.length > 0) { %>
+            <li><span class="receiver-menu-title">Group</span></li>
+                <% for (let item of convs){ %>
+                        <% 
+                        let receiver = _helper.getReceiver(item, user.id);
+                        let link = _helper.standardizeLink(`${displayConf.prefix.mess}/messages/g/${receiver.convid}`);
+                        %> 
+                        <li><a class="single-receiver-in-dropdown" href="<%= link %>" data-userid="<%= item._id %>"><%- include(__path.views_mess+'/partials/simple_user', {item: receiver}) %></a></li>
+                <% } %>
+        <% } %>
+<% }else{ %>
+        <li><span>Sorry, we cant find your friends!</span></li>
+<% } %>

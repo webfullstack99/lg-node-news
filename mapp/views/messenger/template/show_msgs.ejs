@@ -1,0 +1,6 @@
+<% 
+    var msgs = msgs || [];
+%> 
+<% for (let msg of msgs) { %>
+        <%- include(__path.views_mess+'/partials/show_direct_msg', {item: msg, user}) %>
+<% } %>

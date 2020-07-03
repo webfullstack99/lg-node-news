@@ -1,0 +1,15 @@
+<%
+    let Form                = require(__path.helper+'/form.js');
+    let saveMultiSelect     = Form.showSaveMultiSelect(['status', 'delete'], controller);
+%>
+<div id="multi-container" class="form-row">
+    <div class="input-group col-lg-6">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Multi change</span>
+        </div>
+        <%- saveMultiSelect %>
+        <div class="input-group-append">
+            <button class="btn btn-primary" id="save-multi-submit">Submit</button>
+        </div>
+    </div>
+</div>

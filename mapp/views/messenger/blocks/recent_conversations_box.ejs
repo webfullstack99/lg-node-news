@@ -1,0 +1,28 @@
+<% 
+    const _helper = require(__path.helper+'/helper');
+    var recentConversations = recentConversations || [];
+    let addConvLink = _helper.standardizeLink(`${displayConf.prefix.mess}/messages/new`);
+    var isNewMsgOnTop = isNewMsgOnTop || false;
+
+%> 
+<div class="box box-primary" id="message_side_box" >
+    <div class="box-header">
+        <div class="row">
+            <div class="col-md-6"> 
+                <%- include(__path.views_mess+'/partials/simple_user.ejs', {item: user, content: 'Chat', collapseContent: 'lg'}) %>
+            </div>
+            <div class="col-md-6">
+                <a href="<%= addConvLink %>" title="add new conversation" id="add-new-conv-btn" ><i class="fa fa-edit"></i></a>
+            </div>
+
+        </div>
+    </div>
+    <div class="box-body recent-conversations-box">
+        <% if (isNewMsgOnTop) { %>
+            <%- include(__path.views_mess+'/partials/new_sm_conv') %>
+        <% } %>
+        <% for (let item of recentConversations) { %>
+            <%- include(__path.views_mess+'/partials/sm_conv', {item}) %>
+        <% } %>
+    </div>
+</div>

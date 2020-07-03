@@ -1,0 +1,69 @@
+<%
+var hasTopPosts = hasTopPosts || false;
+%>
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+	<head>
+		<%- include(__path.views+'/news/elements/head.ejs'); %>
+	</head>
+	<body>
+		<div id="fb-root"></div>
+		<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v6.0&appId=2889241207815202&autoLogAppEvents=1"></script>
+		<!-- start header Area -->
+		<header>
+			<div class="header-top">
+				<%- include(__path.views+'/news/elements/topbar.ejs'); %>
+			</div>
+			<div class="logo-wrap">
+				<%- include(__path.views+'/news/elements/logo.ejs'); %>
+			</div>
+			<%- include(__path.views+'/news/elements/menu.ejs'); %>
+		</header>
+		<!-- end header Area -->
+
+		<!-- Main content -->
+		<div class="site-main-container">
+			<!-- Start top-post Area -->
+			<% if (hasTopPosts) { %> 
+				<section class="top-post-area pt-10">
+					<%- include(__path.views_news+'/blocks/top_posts.ejs'); %>
+				</section>
+			<% } %>
+			<!-- End top-post Area -->
+			<!-- Start latest-post Area -->
+			<section class="latest-post-area pb-120">
+				<div class="container no-padding">
+					<div class="row">
+						<div class="col-lg-8 post-list">
+							<%- body %>
+						</div>
+						
+						<!-- Left side bar area -->
+						<div class="col-lg-4">
+							<div class="sidebars-area">
+								<!-- Most poppular -->
+								<%- include(__path.views_news+'/blocks/latest_posts.ejs'); %>
+
+								<!-- Facebook page -->
+
+								<%- include(__path.views_news+'/blocks/facebook_page.ejs'); %>
+								<!-- Social network widgets -->
+								<%- include(__path.views_news+'/blocks/social_network_widgets.ejs'); %>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<!-- End latest-post Area -->
+		</div>
+			<!-- End top-post Area -->
+
+		<!-- start footer Area -->
+		<%- include(__path.views+'/news/elements/footer.ejs'); %>
+		<!-- End footer Area -->
+
+		<!-- Scripts -->
+		<%- include(__path.views+'/news/elements/scripts.ejs'); %>
+		
+	</body>
+</html>

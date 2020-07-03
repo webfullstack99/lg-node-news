@@ -1,0 +1,55 @@
+<% 
+    const _helper = require(__path.helper+'/helper');
+    var pageTitle = pageTitle || 'Login';
+    let formAction = _helper.standardizeLink(`${displayConf.prefix.auth}/${displayConf.prefix.admin}/login`);
+    let isShow = false;
+    let classes = '';
+    var errors = errors || [];
+    
+    if (flash.error && errors.length < 1){
+        isShow = true;
+        classes = 'alert alert-danger col-12';
+        for (let item of flash.error){
+            errors.push({param: '', msg: item});
+        }
+    }
+%> 
+
+<form method="post" action="<%=formAction%>" class="login100-form validate-form flex-sb flex-w">
+    <span class="login100-form-title p-b-51">
+        <%= pageTitle %>
+        <a href="<%= displayConf.prefix.news %>" class="btn btn-danger btn-sm" title="Go to site">View site</a>
+    </span>
+    <%- include(__path.views+'/admin/template/show-form-errors.ejs', {errors: errors}) %>
+    
+    <div class="wrap-input100 validate-input m-b-16" data-validate = "Username is required">
+        <input class="input100" type="text" name="username" placeholder="Username" value="<%= item.username %>">
+        <span class="focus-input100"></span>
+        <a id="anotherLoginBy" href="#" class="text-primary">Login with <span>email</span></a>
+    </div>
+    
+    
+    <div class="wrap-input100 validate-input m-b-16" data-validate = "Password is required">
+        <input class="input100" type="password" name="password" placeholder="Password">
+        <span class="focus-input100"></span>
+    </div>
+    
+    <div class="flex-sb-m w-full p-t-3 p-b-24">
+        <div class="contact100-form-checkbox">
+            <input class="input-checkbox100" id="ckb1" type="checkbox" name="rememberMe">
+            <label class="label-checkbox100" for="ckb1"> Remember me </label>
+        </div>
+
+        <div>
+            <a href="#" class="txt1" data-toggle="modal" data-target="#forgot-pass-modal"> Forgot password? </a>
+        </div>
+    </div>
+
+    <div class="container-login100-form-btn m-t-17">
+        <input type="hidden" name="loginBy" value="username">
+        <button class="login100-form-btn"> Login </button>
+    </div>
+</form>
+
+<!-- Forgot pass modal -->
+<%- include(__path.views+'/template/forgot_password_modal') %>

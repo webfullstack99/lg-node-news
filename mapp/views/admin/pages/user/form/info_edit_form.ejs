@@ -1,0 +1,58 @@
+<%
+    let _helper      = require(__path.helper+'/helper.js');
+    let _form        = require(__path.helper+'/form.js'); 
+    let template    = conf.template.form.edit;
+    let selectData  = _form.createSelectData(['status', 'groupAcp'], [true, false]);
+    let groupId     = _helper.getProperty(item, 'group.id');
+    let formData    = [
+        {
+            label: _form.label('username', 'Username', template.label),
+            input: _form.text('username', item.username, template.text),   
+        },{
+            label: _form.label('fullname', 'Fullname', template.label),
+            input: _form.text('fullname', item.fullname, template.text),   
+        },{
+            label: _form.label('email', 'Email', template.label),
+            input: _form.text('email', item.email, template.text),   
+        },{
+            label: _form.label('status', 'Status', template.label),
+            input: _form.select('status', selectData.status, item.status, template.select),   
+        },{
+            label: _form.label('ordering', 'Ordering', template.label),
+            input: _form.number('ordering', item.ordering || 50, template.number),   
+        },{
+            label: _form.label('thumb', 'Thumb', template.label),
+            custom: {
+                type: 'thumb',
+                isCrop: true,
+                thumbData: {
+                    thumb: item.thumb,
+                    alt: item.username,
+                    controller: controller,
+                },
+                containerClass: 'col-lg-8',
+                input: _form.file('thumb', template.file),   
+                label: _form.label('', 'choose your file', {class: 'custom-file-label', ['data-browse']: 'Browse'}),
+                get append(){
+                    let xhtml = '';
+                    xhtml +=  _form.hidden('base64', '', {id: 'image-canvas'});
+                    return xhtml;
+                },
+            }
+        },{
+            get prepend(){
+                let xhtml = '';
+                xhtml +=  _form.hidden('_id', item._id);
+                xhtml +=  _form.hidden('oldThumb', item.thumb);
+                xhtml +=  _form.hidden('formType', 'info_edit');
+                return xhtml;
+            },
+            input: _form.submit('Submit', template.submit),   
+        },
+    ]
+    let formAction  = _helper.getUrl(displayConf.prefix.admin, controller, 'save');
+    if (item._id) formAction+= '/'+item._id;
+%>
+<form method="post" action="<%= formAction %>" accept-charset="UTF-8" enctype="multipart/form-data">
+    <%- include(__path.views+'/admin/template/generate_inputs.ejs', {formData: formData}) %>
+</form>

@@ -1,0 +1,11 @@
+<% 
+    var friendSuggestions = friendSuggestions || [];
+%> 
+<%- include(__path.views_mess+'/template/x-title', {title: `People you may know`, id:'friend-suggestions-box-title', badgeContent: friendSuggestions.length}) %>
+<div class="box-body">
+    <div id="friend-suggestions-box" class="row">
+        <% for (let item of friendSuggestions) { %>
+                <%- include(__path.views_mess+'/partials/single_user.ejs', {item, relationship: 'stranger', userType: 'user-normal'}) %>
+        <% } %>
+    </div>
+</div>
