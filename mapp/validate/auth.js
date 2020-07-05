@@ -18,7 +18,7 @@ const _model = require(__path.model + `/${controller}`);
 let error = conf.template.form_errors;
 
 let check = {
-    username: async(req) => {
+    username: async (req) => {
         await body('username')
             // check space
             .custom((value) => {
@@ -31,7 +31,7 @@ let check = {
             .withMessage(util.format(error.text_length, option.username.minLength, option.username.maxLength))
             .bail()
             //unique
-            .custom(async(value, { req }) => {
+            .custom(async (value, { req }) => {
                 let query;
                 if (req.params.id) query = { _id: { $ne: req.params.id }, username: value };
                 else query = { username: value };
@@ -41,12 +41,12 @@ let check = {
             })
             .withMessage(error.unique).run(req);
     },
-    email: async(req) => {
+    email: async (req) => {
         await body('email')
             .isEmail()
             .run(req);
     },
-    password_confirmed: async(req) => {
+    password_confirmed: async (req) => {
         await body('password_confirmed')
             .custom((value, { req }) => {
                 if (req.body.password == value) return Promise.resolve();
@@ -54,7 +54,7 @@ let check = {
             })
             .withMessage(error.password_confirmed).run(req);
     },
-    password: async(req) => {
+    password: async (req) => {
         await body('password')
             .custom((value, { req }) => {
                 if (value.match(/^(?=.*\d)(?=.*[A-Z])(?=.*\W)(?!.*\s).{8,16}$/)) return Promise.resolve();
@@ -64,12 +64,12 @@ let check = {
             .run(req);
     },
 }
-let runValidate = async function(fields, req) {
+let runValidate = async function (fields, req) {
     for (let field of fields) {
         await check[field.replace(/\./g, '')](req);
     }
 }
-module.exports = async(formType, req, loginBy = null) => {
+module.exports = async (formType, req, loginBy = null) => {
     let fields = [];
     switch (formType) {
         case 'update-pass':
@@ -87,7 +87,7 @@ module.exports = async(formType, req, loginBy = null) => {
                 .isEmail()
                 .bail()
                 //unique
-                .custom(async(value, { req }) => {
+                .custom(async (value, { req }) => {
                     let query = { email: value };;
                     let item = await _model.getItem({ query: query }, { task: 'by-query' })
                     if (!item) return Promise.resolve();
