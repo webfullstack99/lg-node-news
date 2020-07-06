@@ -1,4 +1,3 @@
-const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -10,7 +9,7 @@ const expressLayouts = require('express-ejs-layouts');
 const flash = require('connect-flash');
 const session = require('express-session');
 const socket_io = require("socket.io");
-const sharedsession = require("express-socket.io-session");
+const sharedSession = require("express-socket.io-session");
 
 
 // set global variable
@@ -19,6 +18,9 @@ global.conf = require(__path.config + '/mainConfig');
 global.displayConf = require(__path.helper + '/display');
 
 var app = express();
+
+// passport-google-oauth2
+require(`${__path.libs}/passport-google-oauth2`);
 
 // socket io
 var io = socket_io();
@@ -38,7 +40,7 @@ let mySession = session({
     cookie: { maxAge: conf.cookie.default_max_age },
 })
 app.use(mySession);
-app.io.use(sharedsession(mySession, { autoSave: true }));
+app.io.use(sharedSession(mySession, { autoSave: true }));
 
 app.use(passport.initialize());
 app.use(passport.session());

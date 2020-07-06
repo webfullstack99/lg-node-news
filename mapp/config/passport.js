@@ -42,11 +42,21 @@ module.exports = function (passport) {
     }));
 
     passport.serializeUser(function (user, done) {
-        done(null, user.id);
+        if (user.googleId) done(null, user.googleId);
+        else done(null, user.id);
     });
 
     passport.deserializeUser(async function (id, done) {
-        let user = await _userModel.getItem({ query: { _id: _helper.toObjectId(id) } }, { task: 'get-profile-by-query' });
+        let user;
+        if (Number.isInteger(parseInt(id)) > 1000) {
+            console.log('int');
+            user = await _userModel.getItem({ googleId: id }, { task: 'get-by-google-id' });
+        } else {
+            console.log('not int');
+            user = await _userModel.getItem({ query: { _id: _helper.toObjectId(id) } }, { task: 'get-profile-by-query' });
+        }
+        console.log('\n user logged \n');
+        console.log(user);
         done(null, user);
     });
 }

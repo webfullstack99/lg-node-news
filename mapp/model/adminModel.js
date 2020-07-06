@@ -4,7 +4,6 @@ module.exports = {
     getItemById: async function (params, options) {
         let result = await this._model.findById(params.id);
         return result;
-
     },
 
     getItemByQuery: async function (params, options) {

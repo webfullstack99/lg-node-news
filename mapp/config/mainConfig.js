@@ -1,6 +1,6 @@
 module.exports = {
     evn: 'dev', //dev | publish
-    authentication: false,
+    authentication: true,
     port: 3000,
     get activation_port() {
         if (this.evn == 'dev') return this.port;
